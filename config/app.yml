@@ -1,5 +1,9 @@
 # Configuration file for Talia
 
+talia:
+  author: Nightwolf
+  version: 1.0.0
+
 database:
   host: 127.0.0.1
   username: root
