@@ -7,17 +7,19 @@ module Talia
   module Net
 
     class NetServer
-      attr_accessor :port
+      attr_accessor :host, :port
 
-      def initialize(port)
+      def initialize(host, port)
         @server = nil
+        @host = host
         @port = port
       end
 
       def start()
-        @server = TCPServer.new '127.0.0.1', @port
+        @server = TCPServer.new @host, @port
         @thread = Thread.new {
           socket = @server.accept
+          self.on_connection(socket)
         }
       end
 

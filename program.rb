@@ -40,6 +40,8 @@ module Talia
 
       @realm_server = Net::RealmServer.new()
       @realm_server.start()
+
+      @logger.log "RealmServer started"
     end
   end
 

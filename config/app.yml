@@ -11,4 +11,5 @@ database:
   name: talia
 
 realm:
+  host: 127.0.0.1
   port: 444
