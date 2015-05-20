@@ -9,7 +9,15 @@ require './db/database.rb'
 module Talia
 
   class Program
+    attr_accessor :settings, :realm_server
+    @@instance = nil
+
+    def self.instance
+      @@instance
+    end
+
     def initialize()
+      @@instance = self
       @logger = Misc::Logger.new(self.class)
       @logger.log "Initializing Talia .."
       @settings = Misc::Settings.new('./config/app.yml')
@@ -23,15 +31,15 @@ module Talia
     end
 
     def initialize_data()
+      @logger.log "Initializing database connection .."
       DB::Database.initialize()
     end
 
     def initialize_network()
       @logger.log "Starting network services .."
 
-      @auth_server = Net::RealmServer.new()
-      @auth_server.start()
-
+      @realm_server = Net::RealmServer.new()
+      @realm_server.start()
     end
   end
 

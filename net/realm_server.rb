@@ -1,20 +1,27 @@
 require 'socket'
 require './misc/logger.rb'
+require './net/net_server.rb'
+require './realm/realm_session.rb'
 
 module Talia
   module Net
 
-    class RealmServer
+    class RealmServer < NetServer
+      attr_accessor :sessions
+
       def initialize()
-        @logger = Misc::Logger.new(self.class)
+        super(Program::instance.settings.get_data()["realm"]["port"])
         @server = nil
+        @sessions = Array.new
       end
 
       def start()
-        @server = TCPServer.new '127.0.0.1', 444
-        @thread = Thread.new {
-          socket = @server.accept
-        }
+
+      end
+
+      def on_connection(socket)
+        session = RealmSession.new(socket)
+        @session.push(session)
       end
     end
 
