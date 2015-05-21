@@ -1,5 +1,6 @@
 require './misc/logger.rb'
 require './misc/io.rb'
+require './misc/crypto.rb'
 require './net/net_session.rb'
 
 Talia::Misc::IO.require_directory('./net/message')
@@ -19,13 +20,13 @@ module Talia
     end
 
     class RealmSession < Net::NetSession
-      attr_accessor :login_state
+      attr_accessor :login_state, :account
 
       def initialize(socket)
         super(socket)
         @login_state = RealmState::VERSION
 
-        self.write_message(Net::Message::SMSG_RealmHelloKeyMessage.new("arandomkey"))
+        self.write_message(Net::Message::SMSG_RealmHelloKeyMessage.new(Misc::Crypto.random_string(32)))
       end
 
       def on_data(data)
@@ -54,6 +55,13 @@ module Talia
 
       def on_handle_server_list()
 
+      end
+
+      def send_account_informations()
+        self.write_message(Net::Message::SMSG_RealmAccountNickname.new(@account["nickname"]))
+        self.write("Ac0")
+        #TODO: Send server state message
+        self.write_message(Net::Message::SMSG_RealmAccountRole.new(@account["scope_id"] > 0 ? 0 : 1))
       end
     end
 

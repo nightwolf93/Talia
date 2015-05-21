@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 
 require 'dl'
+
 require './misc/settings.rb'
 require './misc/logger.rb'
 require './misc/system.rb'
+require './misc/crypto.rb'
 require './net/realm_server.rb'
 require './db/database.rb'
 
@@ -23,8 +25,8 @@ module Talia
       @logger.log "Initializing Talia (running on #{Misc::System.get_os}) .."
       @settings = Misc::Settings.new('./config/app.yml')
 
-      self.initialize_data()
-      self.initialize_network()
+      self.initialize_data
+      self.initialize_network
 
       while true
         command = gets.chomp
@@ -33,14 +35,14 @@ module Talia
 
     def initialize_data()
       @logger.log "Initializing database connection .."
-      DB::Database.initialize()
+      DB::Database.initialize
     end
 
     def initialize_network()
       @logger.log "Starting network services .."
 
-      @realm_server = Net::RealmServer.new()
-      @realm_server.start()
+      @realm_server = Net::RealmServer.new
+      @realm_server.start
 
       @logger.log "RealmServer started"
     end
@@ -48,4 +50,4 @@ module Talia
 
 end
 
-program = Talia::Program.new()
+program = Talia::Program.new

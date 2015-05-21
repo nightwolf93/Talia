@@ -16,7 +16,8 @@ module Talia
 
       def self.dofus_special_encryption(password, key)
         crypted = ''
-        begin
+
+        for $i in 0..password.length
           ppas = password[$i]
           ppkey = key[$i]
           apass = (ppas / 16).to_i
@@ -26,8 +27,16 @@ module Talia
 
           crypted += @@hash[anb]
           crypted += @@hash[anb2]
-        end while $i < password.length
+        end
         return crypted
+      end
+
+      def self.random_string(length=32)
+        string = ''
+        for $i in 0..length
+          string += @@hash[Random.new.rand(0..@@hash.length-1)]
+        end
+        return string
       end
     end
 
