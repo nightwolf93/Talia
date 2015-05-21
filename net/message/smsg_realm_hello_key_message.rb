@@ -4,7 +4,7 @@ module Talia
   module Net
     module Message
 
-      class CMSG_RealmHelloKeyMessage < NetMessage
+      class SMSG_RealmHelloKeyMessage < NetMessage
         attr_accessor :encrypt_key
 
         def initialize(encrypt_key)

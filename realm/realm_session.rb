@@ -2,7 +2,7 @@ require './misc/logger.rb'
 require './misc/io.rb'
 require './net/net_session.rb'
 
-Misc::IO.require_directory('./net/message')
+Talia::Misc::IO.require_directory('./net/message')
 
 module Talia
   module Realm
@@ -20,6 +20,7 @@ module Talia
         super(socket)
         @login_state = RealmState::VERSION
 
+        self.write_message(Net::Message::SMSG_RealmHelloKeyMessage.new("arandomkey"))
       end
 
       def on_data(data)

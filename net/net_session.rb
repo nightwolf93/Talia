@@ -1,4 +1,5 @@
 require './misc/logger.rb'
+require './net/net_message.rb'
 
 module Talia
   module Net
@@ -26,8 +27,20 @@ module Talia
         raise "Method need to be implemented"
       end
 
+      def on_close()
+        raise "Method need to be implemented"
+      end
+
       def write(packet)
         @socket.puts(packet + "\x00")
+      end
+
+      def write_message(packet)
+        self.write(packet.get_data())
+      end
+
+      def close()
+
       end
     end
 

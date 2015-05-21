@@ -5,7 +5,7 @@ module Talia
       class NetMessage
         attr_accessor :identifier, :buffer
 
-        def initialize(identifiern buffer = '')
+        def initialize(identifier = '', buffer = '')
           @identifier = identifier
           @buffer = buffer
         end

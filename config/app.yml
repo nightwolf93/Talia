@@ -3,6 +3,7 @@
 talia:
   author: Nightwolf
   version: 1.0.0
+  check_for_update: false
 
 database:
   host: 127.0.0.1
@@ -13,3 +14,11 @@ database:
 realm:
   host: 127.0.0.1
   port: 444
+
+world:
+  host: 127.0.0.1
+  port: 5556
+
+security:
+  client_version: 1.29.1
+  allow_multi_account: true
