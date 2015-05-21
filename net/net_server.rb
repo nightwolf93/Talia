@@ -13,13 +13,18 @@ module Talia
         @server = nil
         @host = host
         @port = port
+        @active = true
       end
 
       def start()
         @server = TCPServer.new @host, @port
         @thread = Thread.new {
-          socket = @server.accept
-          self.on_connection(socket)
+          while @active
+            socket = @server.accept
+            Thread.new {
+              self.on_connection(socket)
+            }
+          end
         }
       end
 

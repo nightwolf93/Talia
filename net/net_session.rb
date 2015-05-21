@@ -9,16 +9,30 @@ module Talia
 
       def initialize(socket)
           @socket = socket
+          @active = true
           @logger = Misc::Logger.new(self.class)
           self.wait_data()
       end
 
       def wait_data()
         Thread.new {
-          data = @socket.gets
-          data.split('\x00').each do |packet|
-            @logger.log("Incoming packet : #{packet}")
-            self.on_data(packet)
+          while @active
+            begin
+              data = @socket.gets("\0")
+              if data != nil
+                data = data.chomp
+              end
+              data = data.gsub("\x0a", "")
+              data = data.strip
+              data.split('\x00').each do |packet|
+                @logger.log("Incoming packet << #{packet}")
+                self.on_data(packet)
+              end
+            rescue Exception => e
+              @active = false
+              self.on_close
+              break
+            end
           end
         }
       end
@@ -31,12 +45,17 @@ module Talia
         raise "Method need to be implemented"
       end
 
-      def write(packet)
-        @socket.puts(packet + "\x00")
+      def write(packet, log = true)
+        if log
+          @logger.log("Send packet >> #{packet}")
+        end
+        @socket.write(packet + "\x00")
       end
 
       def write_message(packet)
-        self.write(packet.get_data())
+        data = packet.get_data()
+        @logger.log("Send packet >> #{packet.class.name}")
+        self.write(data, false)
       end
 
       def close()

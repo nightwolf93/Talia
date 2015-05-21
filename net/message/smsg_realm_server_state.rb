@@ -9,7 +9,7 @@ module Talia
 
         def initialize(id, state)
           super('AH')
-          @server_id = server_id
+          @server_id = id
           @state = state
           @server_id_mul = @server_id * 75
         end

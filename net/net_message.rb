@@ -15,6 +15,7 @@ module Talia
         end
 
         def get_data()
+          self.build
           @identifier + @buffer
         end
       end

@@ -9,7 +9,7 @@ module Talia
 
         def initialize(role_id)
           super('AlK')
-          @role_id = role_id
+          @role_id = role_id.to_s
         end
 
         def build()

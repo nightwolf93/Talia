@@ -16,14 +16,14 @@ module Talia
 
       def self.dofus_special_encryption(password, key)
         crypted = ''
+        for $i in 0..password.length - 1
+          ppas = password[$i][0].ord
+          pkey = key[$i][0].ord
+          apass = ppas / 16
+          akey = ppas % 16
 
-        for $i in 0..password.length
-          ppas = password[$i]
-          ppkey = key[$i]
-          apass = (ppas / 16).to_i
-          akey = (ppas % 16).to_i
-          anb = (apass + (pkey).to_i) % @@hash.length
-          anb2 = (akey + (pkey).to_i) % @@hash.length
+          anb = (apass + pkey) % @@hash.length
+          anb2 = (akey + pkey) % @@hash.length
 
           crypted += @@hash[anb]
           crypted += @@hash[anb2]

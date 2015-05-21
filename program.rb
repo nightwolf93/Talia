@@ -7,6 +7,7 @@ require './misc/logger.rb'
 require './misc/system.rb'
 require './misc/crypto.rb'
 require './net/realm_server.rb'
+require './net/world_server.rb'
 require './db/database.rb'
 
 module Talia
@@ -43,8 +44,11 @@ module Talia
 
       @realm_server = Net::RealmServer.new
       @realm_server.start
-
       @logger.log "RealmServer started"
+
+      @world_server = Net::WorldServer.new
+      @world_server.start
+      @logger.log "WorldServer started"
     end
   end
 
