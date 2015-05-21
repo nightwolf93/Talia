@@ -20,7 +20,7 @@ module Talia
           password: config['database']['password'],
           host:     config['database']['host']
         )
-        
+
         logger.log "Database connection initialized"
       end
     end

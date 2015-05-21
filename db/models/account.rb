@@ -6,7 +6,6 @@ module Talia
     module Models
 
       class Account < ActiveRecord::Base
-        attr_accessor :id, :username, :password, :nickname, :email, :scope_id
         self.table_name = "accounts"
         self.primary_key = "id"
 
