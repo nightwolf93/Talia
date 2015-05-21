@@ -19,6 +19,11 @@ module Talia
       WRONG_CREDITENTIALS = 'x'
     end
 
+    module WorldStateType
+      OFFLINE = 0
+      ONLINE = 1
+    end
+
     class RealmSession < Net::NetSession
       attr_accessor :login_state, :account
 
@@ -60,8 +65,12 @@ module Talia
       def send_account_informations()
         self.write_message(Net::Message::SMSG_RealmAccountNickname.new(@account["nickname"]))
         self.write("Ac0")
-        #TODO: Send server state message
+        self.send_server_state
         self.write_message(Net::Message::SMSG_RealmAccountRole.new(@account["scope_id"] > 0 ? 0 : 1))
+      end
+
+      def send_server_state()
+        self.write_message(Net::Message::SMSG_RealmServerState.new(1, WorldStateType::ONLINE))
       end
     end
 
