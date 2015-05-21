@@ -3,6 +3,7 @@
 require 'dl'
 require './misc/settings.rb'
 require './misc/logger.rb'
+require './misc/system.rb'
 require './net/realm_server.rb'
 require './db/database.rb'
 
@@ -19,7 +20,7 @@ module Talia
     def initialize()
       @@instance = self
       @logger = Misc::Logger.new(self.class)
-      @logger.log "Initializing Talia .."
+      @logger.log "Initializing Talia (running on #{Misc::System.get_os}) .."
       @settings = Misc::Settings.new('./config/app.yml')
 
       self.initialize_data()

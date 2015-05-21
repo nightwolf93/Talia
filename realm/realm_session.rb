@@ -13,6 +13,11 @@ module Talia
       SERVER_LIST = 3
     end
 
+    module AuthentificationFailureType
+      WRONG_VERSION = 'v'
+      WRONG_CREDITENTIALS = 'x'
+    end
+
     class RealmSession < Net::NetSession
       attr_accessor :login_state
 
@@ -24,6 +29,30 @@ module Talia
       end
 
       def on_data(data)
+        case @login_state
+        when RealmState::VERSION
+          self.on_handle_version(Net::Message::CMSG_RealmClientVersion.new(data))
+        when RealmState::AUTHENTIFICATION
+          self.on_handle_authentification(Net::Message::CMSG_RealmAuthentificationRequest.new(data))
+        when RealmState::SERVER_LIST
+          self.on_handle_server_list()
+        end
+      end
+
+      def on_handle_version(packet)
+        if packet.version == Program::instance.settings.get_data()['security']['client_version']
+          @login_state = RealmState::AUTHENTIFICATION
+        else
+          self.write_message(Net::Message::SMSG_RealmAuthentificationFailure.new(AuthentificationFailureType::WRONG_VERSION))
+          self.close()
+        end
+      end
+
+      def on_handle_authentification(packet)
+
+      end
+
+      def on_handle_server_list()
 
       end
     end
