@@ -12,6 +12,10 @@ module Talia
         return data
       end
 
+      def self.require_directory(directory)
+        Dir["#{directory}/*.rb"].each {|file| require file }
+      end
+
     end
 
   end

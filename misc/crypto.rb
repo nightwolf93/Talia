@@ -6,7 +6,9 @@ module Talia
   module Misc
 
     class Crypto
-
+      def self.dofus_special_encryption(password, key)
+        #TODO: Make this method
+      end
     end
 
   end

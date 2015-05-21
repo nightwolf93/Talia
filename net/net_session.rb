@@ -17,6 +17,7 @@ module Talia
           data = @socket.gets
           data.split('\x00').each do |packet|
             @logger.log("Incoming packet : #{packet}")
+            self.on_data(packet)
           end
         }
       end
