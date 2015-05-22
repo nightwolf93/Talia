@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Talia
   module Misc
 
@@ -8,7 +10,15 @@ module Talia
       end
 
       def log(message)
-        puts "[#{@name}] -> #{message}"
+        puts "[#{@name}]".green + " -> #{message}"
+      end
+
+      def error(message)
+        puts "[#{@name}]".red + " -> #{message}"
+      end
+
+      def debug(message)
+        puts "[#{@name}]".magenta + " -> #{message}"
       end
     end
 

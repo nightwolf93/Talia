@@ -3,7 +3,9 @@ require 'active_record'
 require 'mysql2'
 
 require './misc/logger.rb'
-require './db/models/account.rb'
+require './misc/io.rb'
+
+Talia::Misc::IO.require_directory('./db/models')
 
 module Talia
   module DB

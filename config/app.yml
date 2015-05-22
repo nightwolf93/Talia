@@ -4,6 +4,11 @@ talia:
   author: Nightwolf
   version: 1.0.0
   check_for_update: false
+  lang: en
+  log:
+    notice: true
+    error: true
+    debug: true
 
 database:
   host: 127.0.0.1
@@ -18,7 +23,21 @@ realm:
 world:
   host: 127.0.0.1
   port: 5556
+  scope: 0
 
 security:
   client_version: 1.29.1
   allow_multi_account: true
+
+gameplay:
+  ghost: true
+  intro: false
+  start:
+    map: 10354
+    cell: 255
+    orientation: 1
+    level: 1
+    kamas: 0
+  rates:
+    pve: 1
+    pvp: 1

@@ -5,7 +5,7 @@ require './net/net_session.rb'
 require './world/world_manager.rb'
 require './db/models/account.rb'
 
-Talia::Misc::IO.require_directory('./net/message')
+Talia::Misc::IO.require_directory('./net/message/realm')
 
 module Talia
   module Realm

@@ -11,6 +11,14 @@ module Talia
         @@tickets[ticket] = account
         @@logger.log("Subscribe new world account with ticket : #{ticket}")
       end
+
+      def self.get_account_by_ticket(ticket)
+        return @@tickets[ticket]
+      end
+
+      def disconnect_player_on_account(account)
+        
+      end
     end
 
   end

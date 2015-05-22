@@ -6,6 +6,7 @@ require './misc/settings.rb'
 require './misc/logger.rb'
 require './misc/system.rb'
 require './misc/crypto.rb'
+require './misc/i18n.rb'
 require './net/realm_server.rb'
 require './net/world_server.rb'
 require './db/database.rb'
@@ -25,12 +26,18 @@ module Talia
       @logger = Misc::Logger.new(self.class)
       @logger.log "Initializing Talia (running on #{Misc::System.get_os}) .."
       @settings = Misc::Settings.new('./config/app.yml')
+      Misc::I18N.initialize(@settings.get_data()['talia']['lang'])
 
       self.initialize_data
       self.initialize_network
 
       while true
-        command = gets.chomp
+        begin
+          command = gets.chomp
+        rescue Exception => e
+          @logger.error("Talia shutdown ..")
+          break
+        end
       end
     end
 

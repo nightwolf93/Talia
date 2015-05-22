@@ -25,7 +25,7 @@ module Talia
               data = data.gsub("\x0a", "")
               data = data.strip
               data.split('\x00').each do |packet|
-                @logger.log("Incoming packet << #{packet}")
+                @logger.debug("Incoming packet << #{packet}")
                 self.on_data(packet)
               end
             rescue Exception => e
@@ -47,14 +47,14 @@ module Talia
 
       def write(packet, log = true)
         if log
-          @logger.log("Send packet >> #{packet}")
+          @logger.debug("Send packet >> #{packet}")
         end
         @socket.write(packet + "\x00")
       end
 
       def write_message(packet)
         data = packet.get_data()
-        @logger.log("Send packet >> #{packet.class.name}")
+        @logger.debug("Send packet >> #{packet.class.name}")
         self.write(data, false)
       end
 
