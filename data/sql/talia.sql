@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50620
 File Encoding         : 65001
 
-Date: 2015-05-20 16:31:25
+Date: 2015-05-22 17:18:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,18 +35,29 @@ CREATE TABLE `accounts` (
 INSERT INTO `accounts` VALUES ('1', 'test', 'test', 'test', 'test@test.com', '1');
 
 -- ----------------------------
--- Table structure for world_servers
+-- Table structure for characters
 -- ----------------------------
-DROP TABLE IF EXISTS `world_servers`;
-CREATE TABLE `world_servers` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `host` varchar(255) NOT NULL,
-  `game_port` int(11) NOT NULL,
-  `private_port` int(11) NOT NULL,
+DROP TABLE IF EXISTS `characters`;
+CREATE TABLE `characters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) NOT NULL,
+  `nickname` varchar(255) NOT NULL,
+  `level` int(11) NOT NULL,
+  `experience` bigint(20) NOT NULL,
+  `breed_id` int(11) NOT NULL,
+  `gender` int(11) NOT NULL,
+  `kamas` int(11) NOT NULL,
+  `map_id` int(11) NOT NULL,
+  `cell_id` int(11) NOT NULL,
+  `orientation_id` int(11) NOT NULL,
+  `color_1` varchar(255) NOT NULL,
+  `color_2` varchar(255) NOT NULL,
+  `color_3` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of world_servers
+-- Records of characters
 -- ----------------------------
+INSERT INTO `characters` VALUES ('1', '1', 'Nightwolf', '1', '0', '1', '0', '0', '10354', '255', '1', '0', '0', '0');
+INSERT INTO `characters` VALUES ('2', '1', 'Lightwolf', '1', '0', '1', '0', '0', '10354', '255', '1', '0', '0', '0');
