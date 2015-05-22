@@ -12,7 +12,7 @@ module Talia
       end
 
       def self.get_text(text_id, data)
-        text =  @@i18n_file.get_data()
+        text =  @@i18n_file.get_data()[text_id]
 
         return text
       end

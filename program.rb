@@ -11,6 +11,8 @@ require './net/realm_server.rb'
 require './net/world_server.rb'
 require './db/database.rb'
 
+require './world/handler/approach_handler.rb'
+
 module Talia
 
   class Program
@@ -30,6 +32,8 @@ module Talia
 
       self.initialize_data
       self.initialize_network
+
+      puts World::Handler::ApproachHandler.handle_random_name
 
       while true
         begin
