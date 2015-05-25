@@ -4,12 +4,12 @@ module Talia
   module Net
     module Message
 
-      class CMSG_AuthentificationTicket < NetMessage
-        attr_accessor :ticket
+      class CMSG_GameContextRequest < NetMessage
+        attr_accessor :id
 
         def initialize(packet)
           super()
-          @ticket = packet[2..packet.length - 1]
+          @id = packet[2..packet.length - 2]
         end
       end
 

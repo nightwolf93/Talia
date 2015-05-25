@@ -33,8 +33,6 @@ module Talia
       self.initialize_data
       self.initialize_network
 
-      puts World::Handler::ApproachHandler.handle_random_name
-
       while true
         begin
           command = gets.chomp

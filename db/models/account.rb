@@ -12,6 +12,28 @@ module Talia
         def self.find_by_username(username)
           return Account::where(username: username).first
         end
+
+        def get_characters()
+          return DB::Models::Character.find_by_account(self.id)
+        end
+
+        def get_character(id)
+          for $c in self.get_characters()
+            if $c.id == id.to_i
+              return $c
+            end
+          end
+          return nil
+        end
+
+        def has_reached_max_character()
+          count = self.get_characters().length
+          if count >= 5
+            return true
+          else
+            return false
+          end
+        end
       end
 
     end

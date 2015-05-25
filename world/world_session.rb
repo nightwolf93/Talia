@@ -12,7 +12,7 @@ module Talia
   module World
 
     class WorldSession < Net::NetSession
-      attr_accessor :account, :characters
+      attr_accessor :account, :characters, :character
 
       def initialize(socket)
         super(socket)
@@ -21,12 +21,30 @@ module Talia
       end
 
       def on_data(data)
-        case data[0]
-        when 'A'
-          case data[1]
-          when 'T'
-            Handler::ApproachHandler.handle_authentification_ticket(Net::Message::CMSG_AuthentificationTicket.new(data))
+        begin
+          case data[0]
+          when 'A'
+            case data[1]
+            when 'A'
+              Handler::ApproachHandler.handle_create_character(self, Net::Message::CMSG_CreateCharacter.new(data))
+            when 'D'
+              Handler::ApproachHandler.handle_character_delete(self, Net::Message::CMSG_CharacterDeletion.new(data))
+            when 'T'
+              Handler::ApproachHandler.handle_authentification_ticket(self, Net::Message::CMSG_AuthentificationTicket.new(data))
+            when 'P'
+              Handler::ApproachHandler.handle_random_name(self)
+            when 'S'
+              Handler::ApproachHandler.handle_character_selection(self, Net::Message::CMSG_CharacterSelection.new(data))
+            end
+          when 'G'
+            case data[1]
+            when 'C'
+              Handler::ApproachHandler.handle_game_context(self, Net::Message::CMSG_GameContextRequest.new(data))
+            end
           end
+        rescue Exception => e
+          puts "Error : " + e.message
+          puts e.backtrace
         end
       end
 

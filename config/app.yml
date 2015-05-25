@@ -43,6 +43,7 @@ security:
 gameplay:
   ghost: true
   intro: false
+  max_character_per_server: 5
   start:
     map: 10354
     cell: 255
