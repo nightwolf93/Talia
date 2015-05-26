@@ -9,7 +9,7 @@ module Talia
 
         def initialize(packet)
           super()
-          @id = packet[2..packet.length - 2]
+          @id = packet[2..packet.length - 2].to_i
         end
       end
 

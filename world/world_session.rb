@@ -11,12 +11,18 @@ Talia::Misc::IO.require_directory('./world/handler')
 module Talia
   module World
 
+    module WorldSessionState
+      CHARACTER_SELECTION = 1
+      IN_GAME = 2
+    end
+
     class WorldSession < Net::NetSession
-      attr_accessor :account, :characters, :character
+      attr_accessor :account, :characters, :character, :state
 
       def initialize(socket)
         super(socket)
 
+        @state = WorldSessionState::CHARACTER_SELECTION
         self.write_message(Net::Message::SMSG_HelloGame.new)
       end
 
@@ -39,7 +45,7 @@ module Talia
           when 'G'
             case data[1]
             when 'C'
-              Handler::ApproachHandler.handle_game_context(self, Net::Message::CMSG_GameContextRequest.new(data))
+              Handler::GameHandler.handle_game_context(self, Net::Message::CMSG_GameContextRequest.new(data))
             end
           end
         rescue Exception => e

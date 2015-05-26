@@ -77,10 +77,6 @@ module Talia
           session.character = character
           session.write_message(Net::Message::SMSG_CharacterSelection.new(character))
         end
-
-        def self.handle_game_context(session, packet)
-          @@logger.log("Player selected the character '#{session.character.nickname}'")
-        end
       end
 
     end
