@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'active_record'
 
+require './world/world_manager.rb'
+
 module Talia
   module DB
     module Models
@@ -23,6 +25,10 @@ module Talia
 
         def get_default_look()
           return "#{self.breed_id.to_s}#{self.gender.to_s}"
+        end
+
+        def get_map()
+          return World::WorldManager.get_map(self.map_id)
         end
       end
 

@@ -11,6 +11,7 @@ require './net/realm_server.rb'
 require './net/world_server.rb'
 require './db/database.rb'
 
+require './world/world_manager.rb'
 require './world/handler/approach_handler.rb'
 
 module Talia
@@ -46,6 +47,9 @@ module Talia
     def initialize_data()
       @logger.log "Initializing database connection .."
       DB::Database.initialize
+
+      @logger.log "Loading world data .."
+      World::WorldManager.load_world
     end
 
     def initialize_network()

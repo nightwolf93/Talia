@@ -46,6 +46,8 @@ module Talia
             case data[1]
             when 'C'
               Handler::GameHandler.handle_game_context(self, Net::Message::CMSG_GameContextRequest.new(data))
+            when 'I'
+              Handler::GameHandler.handle_game_informations_request(self)
             end
           end
         rescue Exception => e
@@ -56,6 +58,10 @@ module Talia
 
       def on_close()
 
+      end
+
+      def server_message(message)
+        self.write('cs<font color="#CC0000">' + message + '</font>')
       end
     end
 
