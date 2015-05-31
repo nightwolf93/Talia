@@ -17,7 +17,7 @@ require './world/handler/approach_handler.rb'
 module Talia
 
   class Program
-    attr_accessor :settings, :realm_server
+    attr_accessor :settings, :realm_server, :world_server
     @@instance = nil
 
     def self.instance

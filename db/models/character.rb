@@ -30,6 +30,14 @@ module Talia
         def get_map()
           return World::WorldManager.get_map(self.map_id)
         end
+
+        def teleport(map_id, cell_id)
+          #TODO
+        end
+
+        def remove_from_world(session)
+          self.get_map().remove_character(session)
+        end
       end
 
     end

@@ -2,6 +2,7 @@ require 'rubygems'
 require 'active_record'
 
 Talia::Misc::IO.require_directory('./net/message/world')
+Talia::Misc::IO.require_directory('./world/engine')
 
 module Talia
   module DB
@@ -14,6 +15,7 @@ module Talia
 
         def setup()
           @characters = Array.new
+          @pathfinding = World::Engine::Pathfinding.new(self)
         end
 
         def self.find_all()
@@ -37,7 +39,14 @@ module Talia
         end
 
         def remove_character(session)
+          @characters.delete(session)
+          self.dispatch_packet("GM|-#{session.character.id}")
+        end
 
+        def dispatch_packet(packet)
+          @characters.each do |character|
+            character.write(packet)
+          end
         end
 
         def dispatch_message(message)

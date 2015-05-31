@@ -28,6 +28,13 @@ module Talia
           session.character.get_map().display_characters(session)
           session.write("GDK")
         end
+
+        def self.handle_chat_message(session, packet)
+          case packet.channel
+          when '*'
+            session.character.get_map().dispatch_message(Net::Message::SMSG_ChatServerMessage.new(session.character, packet.message))
+          end
+        end
       end
 
     end

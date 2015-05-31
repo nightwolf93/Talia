@@ -22,6 +22,7 @@ module Talia
       def initialize(socket)
         super(socket)
 
+        @character = nil
         @state = WorldSessionState::CHARACTER_SELECTION
         self.write_message(Net::Message::SMSG_HelloGame.new)
       end
@@ -42,6 +43,11 @@ module Talia
             when 'S'
               Handler::ApproachHandler.handle_character_selection(self, Net::Message::CMSG_CharacterSelection.new(data))
             end
+          when 'B'
+            case data[1]
+            when 'M'
+              Handler::GameHandler.handle_chat_message(self, Net::Message::CMSG_ChatClientMessage.new(data))
+            end
           when 'G'
             case data[1]
             when 'C'
@@ -57,7 +63,7 @@ module Talia
       end
 
       def on_close()
-
+        @character.remove_from_world(self)
       end
 
       def server_message(message)
