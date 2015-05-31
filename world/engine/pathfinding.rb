@@ -72,7 +72,7 @@ module Talia
           back_cell = last_cell
           actual_cell = last_cell
           for $i in [0..length - 1]
-
+            #TODO
           end
           return cell + ",1"
         end
