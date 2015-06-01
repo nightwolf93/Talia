@@ -2,3 +2,5 @@ WELCOME_MESSAGE: "<b>Talia</b>, a Dofus 1.29.1 server engine by <b>Nightwolf</b>
 
 ROLE_PERMISSION_REQUIRED: "Insufficient permission (MIN_ROLE_LEVEL_REQUIRED)"
 HELP_COMMAND_DESCRIPTION: "Displays all commands allowed for your account"
+HELP_COMMAND_HEADER: "Command available for you account :"
+START_COMMAND_DESCRIPTION: "Teleport your character to the server start map"

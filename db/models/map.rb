@@ -23,10 +23,6 @@ module Talia
         end
 
         def add_character(session, first = false)
-          if !first
-            session.character.get_map().remove_character(session)
-          end
-
           session.character.map_id = self.id
 
           self.dispatch_message(Net::Message::SMSG_DisplayMapCharacter.new([session]))
