@@ -64,6 +64,7 @@ module Talia
 
       def on_close()
         @character.remove_from_world(self)
+        Program::instance.world_server.sessions.delete(self)
       end
 
       def server_message(message)

@@ -20,7 +20,22 @@ module Talia
       end
 
       def disconnect_player_on_account(account)
-
+        Program::instance.realm_server.sessions.each do |session|
+          if session.account != nil
+            if session.account.id == account.id
+              session.close()
+              return
+            end
+          end
+        end
+        Program::instance.world_server.sessions.each do |session|
+          if session.account != nil
+            if session.account.id == account.id
+              session.close()
+              return
+            end
+          end
+        end
       end
 
       def self.load_world()

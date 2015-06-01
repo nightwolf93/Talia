@@ -72,9 +72,52 @@ module Talia
           back_cell = last_cell
           actual_cell = last_cell
           for $i in [0..length - 1]
-            #TODO
+            actual_cell = self.next_cell(actual_cell, direction)
+            back_cell = actual_cell
           end
           return cell + ",1"
+        end
+
+        def remake_path(start_cell, path)
+          new_path = ''
+          new_cell = self.get_cell_num(path[path.length - 3..path.length - 1])
+          last_cell = start_cell
+          $i = 0
+          while $i <= path.length - 1
+            actual_cell = path[$i, $i + 3]
+            line_data = self.remake_line(last_cell, actual_cell, new_cell).split(',')
+            new_path += line_data[0]
+            if(line_data[1] == nil)
+              return new_path
+            end
+            last_cell = self.get_cell_num(actualCell[1..actual_cell.length - 1])
+            $i += 3
+          end
+          destination = get_cell_num(path[path.length - 3..path.length - 1])
+          new_direction = get_dir_num(path[path.length - 4..path.length - 3])
+          return new_path
+        end
+
+        def next_cell(cell, dir)
+          case dir
+            case 0
+              return cell + 1
+            case 1
+              return cell + @map.width
+            case 2
+              return cell +(@map.width * 2) - 1
+            case 3
+              return cell + @map.width - 1
+            case 4
+              return cell -1
+            case 5
+              return cell - @map.width
+            case 6
+              return cell - (@map.width * 2) + 1
+            case 7
+              return cell - @map.width + 1
+          end
+          return -1
         end
       end
 
