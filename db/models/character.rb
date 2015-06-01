@@ -27,7 +27,7 @@ module Talia
           return "#{self.breed_id.to_s}#{self.gender.to_s}"
         end
 
-        def get_map()
+        def map()
           return World::WorldManager.get_map(self.map_id)
         end
 
@@ -36,7 +36,7 @@ module Talia
         end
 
         def remove_from_world(session)
-          self.get_map().remove_character(session)
+          self.map().remove_character(session)
         end
       end
 

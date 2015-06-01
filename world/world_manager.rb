@@ -1,6 +1,7 @@
 require './misc/logger.rb'
 
 Talia::Misc::IO.require_directory('./db/models')
+Talia::Misc::IO.require_directory('./world/command')
 
 module Talia
   module World
@@ -9,6 +10,7 @@ module Talia
       @@logger = Misc::Logger.new(WorldManager)
       @@tickets = Hash.new
       @@maps = Array.new
+      @@commands = Array.new
 
       def self.subscribe_ticket_player(ticket, account)
         @@tickets[ticket] = account
@@ -46,7 +48,13 @@ module Talia
       def self.load_maps()
         @@logger.log("Loading maps ..")
         @@maps = DB::Models::Map.find_all()
-        @@logger.log("#{@@maps.count} maps loaded")
+        @@logger.log("#{@@maps.count} map(s) loaded")
+      end
+
+      def self.load_commands()
+        @@logger.log("Loading commands ..")
+        @@commands.push(Command::Help.new)
+        @@logger.log("#{@@commands.count} command(s) loaded")
       end
 
       def self.get_map(id)
