@@ -34,6 +34,14 @@ module Talia
             return false
           end
         end
+
+        def has_operator_scope()
+          if self.scope_id > 0
+            return true
+          else
+            return false
+          end
+        end
       end
 
     end
