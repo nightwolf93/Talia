@@ -28,17 +28,6 @@ world:
 security:
   client_version: 1.29.1
   allow_multi_account: true
-  scope_command:
-    1: # Simple moderator
-      tp: true
-      level: true
-      kamas: false
-      say: true
-    2: # Admin
-      tp: true
-      level: true
-      kamas: true
-      say: true
 
 gameplay:
   ghost: true

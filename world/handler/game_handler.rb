@@ -45,7 +45,12 @@ module Talia
       end
 
       def self.execute_chat_command(session, command)
-        #TODO
+        identifier = command.split(' ')[0]
+        parameters = command[identifier.length..command.length - 1].split(' ')
+        command = WorldManager.get_command(identifier)
+        if command.has_permission(session)
+          command.handle(session, parameters)
+        end
       end
 
     end

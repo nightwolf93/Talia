@@ -65,6 +65,15 @@ module Talia
         end
         return nil
       end
+
+      def self.get_command(identifier)
+        @@commands.each do |command|
+          if command.identifier == identifier
+            return command
+          end
+        end
+        return nil
+      end
     end
 
   end
